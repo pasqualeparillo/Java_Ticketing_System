@@ -1,0 +1,57 @@
+USE mUIpp1Z0bb;
+
+DROP TABLE IF EXISTS `Agents`;
+
+CREATE TABLE `Agents` (
+                         `Agent_ID` int(10) NOT NULL AUTO_INCREMENT,
+                         `Agent_Name` varchar(50) DEFAULT NULL,
+                         `Password` text,
+                         `Create_Date` datetime DEFAULT CURRENT_TIMESTAMP,
+                         `Created_By` varchar(50) DEFAULT NULL,
+                         `Last_Update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                         `Last_Updated_By` varchar(50) DEFAULT NULL,
+                         PRIMARY KEY (`Agent_ID`),
+                         UNIQUE KEY `Agent_Name` (`Agent_Name`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+DROP TABLE IF EXISTS `Customers`;
+
+CREATE TABLE `Customers` (
+                         `Customer_ID` int(10) NOT NULL AUTO_INCREMENT,
+                         `Customer_Name` varchar(50) DEFAULT NULL,
+                         `Email` varchar(50) DEFAULT NULL,
+				 `Department` varchar(50) DEFAULT NULL,
+				 `Phone` varchar(18) DEFAULT NULL,
+                         `Create_Date` datetime DEFAULT CURRENT_TIMESTAMP,
+                         `Created_By` varchar(50) DEFAULT NULL,
+                         `Last_Update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                         `Last_Updated_By` varchar(50) DEFAULT NULL,
+                         PRIMARY KEY (`Customer_ID`),
+                         UNIQUE KEY `Customer_Name` (`Customer_Name`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+
+DROP TABLE IF EXISTS `Tickets`;
+
+CREATE TABLE `Tickets` (
+                         `Ticket_ID` int(10) NOT NULL AUTO_INCREMENT,
+                         `Title` varchar(50) DEFAULT NULL,
+				 `Description` varchar(800) DEFAULT NULL,
+				 `Note` varchar(2000) DEFAULT NULL,
+	 			 `Type` varchar(24) DEFAULT NULL,
+		 		 `Status` varchar(24) DEFAULT NULL,
+				 `Priority` varchar(24) DEFAULT NULL,
+  				 `Customer_ID` int(10) DEFAULT NULL,
+				 `Agent_ID` int(10) DEFAULT NULL,
+                         `Create_Date` datetime DEFAULT CURRENT_TIMESTAMP,
+                         `Created_By` varchar(50) DEFAULT NULL,
+                         `Last_Update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                         `Last_Updated_By` varchar(50) DEFAULT NULL,
+                         PRIMARY KEY (`Ticket_ID`),
+        			 KEY `Customer_ID` (`Customer_ID`),
+ 				 KEY `Agent_ID` (`Agent_ID`),
+ 				 CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`Customer_ID`) REFERENCES `Customers` (`Customer_ID`),
+				 CONSTRAINT `agents_ibfk_1` FOREIGN KEY (`Agent_ID`) REFERENCES `Agents` (`Agent_ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+insert into Agents(Agent_Name, Password) VALUES ('admin', 'admin')

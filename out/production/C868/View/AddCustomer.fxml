@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="340.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddCustomer">
+   <children>
+      <Label layoutX="28.0" layoutY="52.0" text="Name:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="customerName" layoutX="28.0" layoutY="70.0" prefWidth="282.0" style="-fx-background-color: #E5E5E5;" />
+      <Label layoutX="28.0" layoutY="102.0" text="Email:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="customerEmail" layoutX="28.0" layoutY="120.0" prefWidth="282.0" style="-fx-background-color: #E5E5E5;" />
+      <Label layoutX="28.0" layoutY="153.0" text="Phone:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="customerPhone" layoutX="28.0" layoutY="171.0" prefWidth="282.0" style="-fx-background-color: #E5E5E5;" />
+      <Label layoutX="28.0" layoutY="203.0" text="Department:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Button layoutX="225.0" layoutY="300.0" mnemonicParsing="false" onAction="#saveCustomer" style="-fx-background-color: #9147FF;" text="Save" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Button layoutX="272.0" layoutY="300.0" mnemonicParsing="false" onAction="#exitToMain" style="-fx-background-color: #EB0400;" text="Exit" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+      <Label layoutX="121.0" layoutY="14.0" text="Add Customer:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="customerDepartment" layoutX="28.0" layoutY="227.0" prefHeight="26.0" prefWidth="282.0" />
+   </children>
+</AnchorPane>
