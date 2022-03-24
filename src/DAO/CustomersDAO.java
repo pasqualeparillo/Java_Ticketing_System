@@ -31,7 +31,7 @@ public class CustomersDAO {
                 String Email = sqlQueryResult.getString("Email");
                 String Department = sqlQueryResult.getString("Department");
                 String Phone = sqlQueryResult.getString("Phone");
-                Customers customers = new Customers(Customer_ID, Customer_Name,Email, Phone, Department);
+                Customers customers = new Customers(Customer_ID, Customer_Name,Email, Department, Phone);
                 customersList.add(customers);
             }
         } catch (SQLException e) {
@@ -66,7 +66,7 @@ public class CustomersDAO {
      * @throws SQLException
      */
     public static ObservableList<Customers> deleteCustomer() throws SQLException {
-        String sql = String.format("DELETE FROM Agents WHERE Customer_ID=%s.", MainScreen.getCustomerToModify().getCustomer_ID());
+        String sql = String.format("DELETE FROM Customers WHERE Customer_ID=%s.", MainScreen.getCustomerToModify().getCustomer_ID());
         try {
             PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
             sqlQuery.executeUpdate();

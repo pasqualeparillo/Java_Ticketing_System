@@ -7,13 +7,13 @@
 
 <AnchorPane prefHeight="640.0" prefWidth="900.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainScreen">
    <children>
-      <Label layoutX="115.0" layoutY="14.0" text="Ticketing System">
+      <Label layoutX="386.0" layoutY="67.0" text="Ticketing System">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Label>
-      <AnchorPane layoutX="115.0" layoutY="60.0" prefHeight="217.0" prefWidth="760.0">
+      <AnchorPane layoutX="51.0" layoutY="106.0" prefHeight="224.0" prefWidth="824.0">
          <children>
-            <TableView fx:id="ticketsTable" layoutY="31.0" prefHeight="160.0" prefWidth="760.0">
+            <TableView fx:id="ticketsTable" layoutY="31.0" prefHeight="160.0" prefWidth="796.0">
               <columns>
                   <TableColumn fx:id="Ticket_ID" prefWidth="75.0" text="ID" />
                   <TableColumn fx:id="Ticket_Customer_ID" prefWidth="75.0" text="Customer_ID" />
@@ -42,10 +42,10 @@
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
-            <TextField fx:id="ticketSearch" layoutX="611.0" layoutY="1.0" onKeyTyped="#searchForTicket" />
+            <TextField fx:id="ticketSearch" layoutX="611.0" layoutY="1.0" onKeyTyped="#searchForTicket" prefHeight="26.0" prefWidth="186.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="115.0" layoutY="330.0" prefHeight="246.0" prefWidth="760.0">
+      <AnchorPane layoutX="51.0" layoutY="344.0" prefHeight="246.0" prefWidth="824.0">
          <children>
             <Label layoutX="-1.0" layoutY="25.0" text="Customers">
                <font>
@@ -73,7 +73,7 @@
                   <Font name="System Bold" size="12.0" />
                </font></Button>
             <TextField fx:id="customerSearch" layoutX="383.0" layoutY="21.0" onKeyTyped="#searchForCustomers" />
-            <TableView fx:id="agentsTable" layoutX="553.0" layoutY="50.0" prefHeight="160.0" prefWidth="206.0">
+            <TableView fx:id="agentsTable" layoutX="553.0" layoutY="50.0" prefHeight="160.0" prefWidth="242.0">
               <columns>
                 <TableColumn fx:id="Agent_Name" prefWidth="205.60001220703126" text="Agent" />
               </columns>
@@ -107,13 +107,31 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <TextField fx:id="agentSearch" layoutX="610.0" layoutY="21.0" onKeyTyped="#searchForAgent" />
+            <TextField fx:id="agentSearch" layoutX="610.0" layoutY="21.0" onKeyTyped="#searchForAgent" prefHeight="26.0" prefWidth="185.0" />
          </children></AnchorPane>
-      <VBox prefHeight="640.0" prefWidth="58.0" style="-fx-background-color: #EFEFF1;" />
       <Button layoutX="823.0" layoutY="601.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="26.0" prefWidth="55.0" style="-fx-background-color: #EB0400; -fx-text-fill: #fff; -fx-cursor: hand;" text="Exit" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
+      <HBox layoutX="52.0" layoutY="25.0" prefHeight="26.0" prefWidth="846.0" style="-fx-spacing: 5;">
+         <children>
+            <Button mnemonicParsing="false" onAction="#reportByType" style="-fx-background-color: #9147FF;" text="Tickets By Type" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#reportByUrgency" style="-fx-background-color: #9147FF;" text="Tickets By Urgency" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#reportByUser" style="-fx-background-color: #9147FF;" text="Tickets By User" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ModifyCustomer implements Initializable {
-    @FXML public TextField customerID, customerName, customerEmail, customerPhone;
+    @FXML public TextField customerName, customerEmail, customerPhone;
     @FXML public ComboBox<String> customerDepartment;
 
     private static String fxmlPath;
@@ -87,9 +87,10 @@ public class ModifyCustomer implements Initializable {
                 customerDepartment.setValue(c.getDepartment());
             }
         }
+        System.out.println(MainScreen.getCustomerToModify().getEmail());
+        System.out.println(MainScreen.getCustomerToModify().getPhone());
         customerPhone.setText(MainScreen.getCustomerToModify().getPhone());
         customerEmail.setText(MainScreen.getCustomerToModify().getEmail());
-        customerID.setText(Integer.toString(MainScreen.getCustomerToModify().getCustomer_ID()));
         customerName.setText(MainScreen.getCustomerToModify().getCustomer_Name());
     }
     @Override

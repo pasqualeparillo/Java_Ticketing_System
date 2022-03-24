@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Optional;
@@ -59,8 +60,7 @@ public class MainScreen implements Initializable {
     @FXML private TableView<Agents> agentsTable;
     @FXML private TableColumn<Agents, String> Agent_Name;
 
-    private void setAppointmentTable() {
-        TicketDAO.getTickets();
+    private void setTicketsTable() {
         ticketsTable.setItems(TicketDAO.getAllTickets());
         Ticket_ID.setCellValueFactory(new PropertyValueFactory<>("Ticket_ID"));
         Ticket_Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
@@ -73,7 +73,6 @@ public class MainScreen implements Initializable {
         Ticket_Agent_ID.setCellValueFactory(new PropertyValueFactory<>("Agent_ID"));
     }
     private void setCustomersTable() {
-        CustomersDAO.getCustomers();
         customersTable.setItems(CustomersDAO.getAllCustomers());
         Customer_ID.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
         Customer_Name.setCellValueFactory(new PropertyValueFactory<>("Customer_Name"));
@@ -81,16 +80,39 @@ public class MainScreen implements Initializable {
         Customer_Email.setCellValueFactory(new PropertyValueFactory<>("Email"));
     }
     private void setAgentsTable() {
-        AgentsDAO.getAgents();
         agentsTable.setItems(AgentsDAO.getAllAgents());
         Agent_Name.setCellValueFactory(new PropertyValueFactory<>("Agent_Name"));
 
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setAppointmentTable();
+        setTicketsTable();
         setCustomersTable();
         setAgentsTable();
+    }
+    /**
+     * Opens reports by customer scene
+     */
+    @FXML
+    public void reportByUser(ActionEvent actionEvent) {
+        fxmlPath = "/View/UserReport.fxml";
+        switchScene(actionEvent, "Reports By User");
+    }
+    /**
+     * Opens reports by type scene
+     */
+    @FXML
+    public void reportByType(ActionEvent actionEvent) {
+        fxmlPath = "/View/TypeReport.fxml";
+        switchScene(actionEvent, "Reports By Type");
+    }
+    /**
+     * Opens reports by urgency scene
+     */
+    @FXML
+    public void reportByUrgency(ActionEvent actionEvent) {
+        fxmlPath = "/View/UrgencyReport.fxml";
+        switchScene(actionEvent, "Reports By Urgency");
     }
     /**
      * Opens add customer scene
@@ -116,7 +138,7 @@ public class MainScreen implements Initializable {
 
         } else {
             alertConfirm.setTitle("Please confirm");
-            alertConfirm.setContentText("Either you did not select a customer or none available");
+            alertConfirm.setContentText("Either you did not select a customer or they currently have a ticket assigned to them");
             alertConfirm.showAndWait();
         }
     }
@@ -138,7 +160,8 @@ public class MainScreen implements Initializable {
         Customers selectedItem = customersTable.getSelectionModel().getSelectedItem();
         Alert alertConfirm = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
         customerToModify = selectedItem;
-        if(selectedItem != null) {
+        ObservableList<Tickets> customerTickets = TicketDAO.getTicketsByUser(customerToModify.getCustomer_ID());
+        if(selectedItem != null && customerTickets == null) {
             alertConfirm.setTitle("Please Confirm");
             alertConfirm.setContentText("Are you sure you would like to delete this customer");
             Optional<ButtonType> result = alertConfirm.showAndWait();
@@ -251,8 +274,9 @@ public class MainScreen implements Initializable {
     public void deleteAgent(ActionEvent actionEvent) throws SQLException {
         Agents selectedItem = agentsTable.getSelectionModel().getSelectedItem();
         Alert alertConfirm = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        ObservableList<Tickets> agentTickets = TicketDAO.getTicketsByAgent(customerToModify.getCustomer_ID());
         agentToModify = selectedItem;
-        if(selectedItem != null) {
+        if(selectedItem != null && agentTickets == null) {
             alertConfirm.setTitle("Are you sure you would like to delete this agent");
             alertConfirm.setContentText("Please confirm");
             Optional<ButtonType> result = alertConfirm.showAndWait();
@@ -260,7 +284,7 @@ public class MainScreen implements Initializable {
                 AgentsDAO.deleteAgent();
             }
         } else {
-            alertConfirm.setTitle("Either you did not select a agent or none available");
+            alertConfirm.setTitle("Either you did not select an agent or the agent has a ticket assigned to them");
             alertConfirm.setContentText("Please confirm");
             alertConfirm.showAndWait();
         }

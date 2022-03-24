@@ -2,7 +2,6 @@ package DAO;
 
 import Controller.MainScreen;
 import Database.JDBC;
-import Model.Agents;
 import Model.Tickets;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,8 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class TicketDAO {
     public static ObservableList<Tickets> ticketsList = FXCollections.observableArrayList();
@@ -28,7 +25,6 @@ public class TicketDAO {
            String sql = "SELECT * FROM Tickets";
            PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
            ResultSet sqlQueryResult = sqlQuery.executeQuery();
-
            while(sqlQueryResult.next()) {
                int Ticket_ID = sqlQueryResult.getInt("Ticket_ID");
                int Agent_ID = sqlQueryResult.getInt("Agent_ID");
@@ -45,6 +41,122 @@ public class TicketDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    /**
+     * returns tickets by customer_ID
+     * @return
+     */
+    public static ObservableList<Tickets> getTicketsByUser(int customer_ID) {
+        String sql = String.format("SELECT * FROM Tickets WHERE Customer_ID=%s.", customer_ID);
+        try {
+            ticketsList.clear();
+            PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
+            ResultSet sqlQueryResult = sqlQuery.executeQuery();
+            while (sqlQueryResult.next()) {
+                int Ticket_ID = sqlQueryResult.getInt("Ticket_ID");
+                int Agent_ID = sqlQueryResult.getInt("Agent_ID");
+                int Customer_ID = sqlQueryResult.getInt("Customer_ID");
+                String Priority = sqlQueryResult.getString("Priority");
+                String Title = sqlQueryResult.getString("Title");
+                String Description = sqlQueryResult.getString("Description");
+                String Note = sqlQueryResult.getString("Note");
+                String Type = sqlQueryResult.getString("Type");
+                String Status = sqlQueryResult.getString("Status");
+                Tickets tickets = new Tickets(Ticket_ID, Title, Description,Note, Type, Status, Priority, Customer_ID, Agent_ID);
+                ticketsList.add(tickets);
+                return ticketsList;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    /**
+     * returns tickets by customer_ID
+     * @return
+     */
+    public static ObservableList<Tickets> getTicketsByAgent(int agent_ID) {
+        String sql = String.format("SELECT * FROM Tickets WHERE Agent_ID=%s.", agent_ID);
+        try {
+            ticketsList.clear();
+            PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
+            ResultSet sqlQueryResult = sqlQuery.executeQuery();
+            while (sqlQueryResult.next()) {
+                int Ticket_ID = sqlQueryResult.getInt("Ticket_ID");
+                int Agent_ID = sqlQueryResult.getInt("Agent_ID");
+                int Customer_ID = sqlQueryResult.getInt("Customer_ID");
+                String Priority = sqlQueryResult.getString("Priority");
+                String Title = sqlQueryResult.getString("Title");
+                String Description = sqlQueryResult.getString("Description");
+                String Note = sqlQueryResult.getString("Note");
+                String Type = sqlQueryResult.getString("Type");
+                String Status = sqlQueryResult.getString("Status");
+                Tickets tickets = new Tickets(Ticket_ID, Title, Description,Note, Type, Status, Priority, Customer_ID, Agent_ID);
+                ticketsList.add(tickets);
+                return ticketsList;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    /**
+     * returns tickets by type
+     * @return
+     */
+    public static ObservableList<Tickets> getTicketsByType(String ticketType) {
+        String sql = String.format("SELECT * FROM Tickets WHERE Type='%s'", ticketType);
+        try {
+            ticketsList.clear();
+            PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
+            ResultSet sqlQueryResult = sqlQuery.executeQuery();
+            while (sqlQueryResult.next()) {
+                int Ticket_ID = sqlQueryResult.getInt("Ticket_ID");
+                int Agent_ID = sqlQueryResult.getInt("Agent_ID");
+                int Customer_ID = sqlQueryResult.getInt("Customer_ID");
+                String Priority = sqlQueryResult.getString("Priority");
+                String Title = sqlQueryResult.getString("Title");
+                String Description = sqlQueryResult.getString("Description");
+                String Note = sqlQueryResult.getString("Note");
+                String Type = sqlQueryResult.getString("Type");
+                String Status = sqlQueryResult.getString("Status");
+                Tickets tickets = new Tickets(Ticket_ID, Title, Description,Note, Type, Status, Priority, Customer_ID, Agent_ID);
+                ticketsList.add(tickets);
+            }
+            return ticketsList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    /**
+     * returns tickets by urgency
+     * @return
+     */
+    public static ObservableList<Tickets> getTicketsByUrgency(String urgency) {
+        String sql = String.format("SELECT * FROM Tickets WHERE Priority='%s'", urgency);
+        try {
+            ticketsList.clear();
+            PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
+            ResultSet sqlQueryResult = sqlQuery.executeQuery();
+            while (sqlQueryResult.next()) {
+                int Ticket_ID = sqlQueryResult.getInt("Ticket_ID");
+                int Agent_ID = sqlQueryResult.getInt("Agent_ID");
+                int Customer_ID = sqlQueryResult.getInt("Customer_ID");
+                String Priority = sqlQueryResult.getString("Priority");
+                String Title = sqlQueryResult.getString("Title");
+                String Description = sqlQueryResult.getString("Description");
+                String Note = sqlQueryResult.getString("Note");
+                String Type = sqlQueryResult.getString("Type");
+                String Status = sqlQueryResult.getString("Status");
+                Tickets tickets = new Tickets(Ticket_ID, Title, Description,Note, Type, Status, Priority, Customer_ID, Agent_ID);
+                ticketsList.add(tickets);
+                return ticketsList;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
     /**
      * update Ticket

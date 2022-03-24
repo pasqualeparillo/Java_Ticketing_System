@@ -1,5 +1,6 @@
 package Controller;
 
+import Database.JDBC;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,6 +15,9 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class LoginScreen {
     private String fxmlPath;
@@ -24,16 +28,30 @@ public class LoginScreen {
 
 
     public void submitLogin(ActionEvent actionEvent) {
-        if(!userNameField.getText().equals("tomato") && !passwordField.getText().equals("tomato")) {
-            System.out.println(userNameField.getText());
-            System.out.println(passwordField.getText());
-            Alert alertConfirm = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
-            alertConfirm.setTitle("Username or password is incorrect ");
-            alertConfirm.setContentText("Please try again");
-            alertConfirm.showAndWait();
-        } else {
-            fxmlPath = "/View/MainScreen.fxml";
-            switchScene(actionEvent, "Appointment Manager");
+        if(!userNameField.getText().isEmpty() || !passwordField.getText().isEmpty()) {
+            try {
+                String sql = String.format("SELECT Agent_Name, Password FROM Agents WHERE Agent_Name = '%s' AND Password = '%s'", userNameField.getText(), passwordField.getText());
+                PreparedStatement preparedStatement = JDBC.getConnection().prepareStatement(sql);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if(resultSet.next()) {
+                    fxmlPath = "/View/MainScreen.fxml";
+                    switchScene(actionEvent, "Ticket System");
+                } else {
+                    Alert invalidPassword = new Alert(Alert.AlertType.ERROR);
+                    invalidPassword.setTitle("Error Dialog");
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Login Error");
+                    alert.setContentText("Username or Password Incorrect");
+                    alert.showAndWait();
+                }
+            } catch (SQLException e) {
+                Alert invalidPassword = new Alert(Alert.AlertType.ERROR);
+                invalidPassword.setTitle("Error Dialog");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Login Error");
+                alert.setContentText("Username or Password Incorrect");
+                alert.showAndWait();
+            }
         }
     }
 
