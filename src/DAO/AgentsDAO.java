@@ -29,7 +29,8 @@ public class AgentsDAO {
                 int Agent_ID = sqlQueryResult.getInt("Agent_ID");
                 String Agent_Name = sqlQueryResult.getString("Agent_Name");
                 String Password = sqlQueryResult.getString("Password");
-                Agents agents = new Agents(Agent_ID, Agent_Name, Password);
+                String Email = sqlQueryResult.getString("Email");
+                Agents agents = new Agents(Agent_ID, Agent_Name, Password, Email);
                 agentList.add(agents);
             }
         } catch (SQLException e) {
@@ -39,9 +40,9 @@ public class AgentsDAO {
     /**
      * update Agent
      */
-    public static void updateAgent(String Username,String Password) {
+    public static void updateAgent(String Username,String Password, String Email) {
         try {
-            String sql = String.format("Update Agents set Agent_Name='%s', Password='%s' WHERE Agent_ID=%s", Username, Password, MainScreen.getAgentToModify().getAgent_ID());
+            String sql = String.format("Update Agents set Agent_Name='%s', Password='%s', Email='%s' WHERE Agent_ID=%s", Username, Password, Email, MainScreen.getAgentToModify().getAgent_ID());
             JDBC.getConnection().prepareStatement(sql).execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -50,9 +51,9 @@ public class AgentsDAO {
     /**
      * add Agents
      */
-    public static void addAgent(String Username, String Password) {
+    public static void addAgent(String Username, String Password, String Email) {
         try {
-            String sql = String.format("INSERT INTO Agents (Agent_Name, Password) VALUES ('%s', '%s')", Username, Password);
+            String sql = String.format("INSERT INTO Agents (Agent_Name, Password, Email) VALUES ('%s', '%s', '%s')", Username, Password, Email);
             JDBC.getConnection().prepareStatement(sql).execute();
         } catch (SQLException e) {
             e.printStackTrace();

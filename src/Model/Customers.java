@@ -3,7 +3,7 @@ package Model;
 /**
  * Customers class
  */
-public class Customers {
+public class Customers extends Employee {
     private int Customer_ID;
     private String Customer_Name;
     private String Email;
@@ -11,9 +11,9 @@ public class Customers {
     private String Phone;
 
     public Customers(int customer_ID, String customer_Name, String email, String department, String phone) {
-        Customer_ID = customer_ID;
-        Customer_Name = customer_Name;
-        Email = email;
+        setId(customer_ID);
+        setName(customer_Name);
+        setEmail(email);
         Department = department;
         Phone = phone;
     }

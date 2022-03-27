@@ -75,7 +75,8 @@
             <TextField fx:id="customerSearch" layoutX="383.0" layoutY="21.0" onKeyTyped="#searchForCustomers" />
             <TableView fx:id="agentsTable" layoutX="553.0" layoutY="50.0" prefHeight="160.0" prefWidth="242.0">
               <columns>
-                <TableColumn fx:id="Agent_Name" prefWidth="205.60001220703126" text="Agent" />
+                <TableColumn fx:id="Agent_Name" prefWidth="205.60001220703126" text="Name" />
+                 <TableColumn fx:id="Agent_Email" prefWidth="205.60001220703126" text="Email" />
               </columns>
             </TableView>
             <Label layoutX="556.0" layoutY="25.0" text="Agents">

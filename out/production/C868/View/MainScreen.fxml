@@ -75,7 +75,8 @@
             <TextField fx:id="customerSearch" layoutX="383.0" layoutY="21.0" onKeyTyped="#searchForCustomers" />
             <TableView fx:id="agentsTable" layoutX="553.0" layoutY="50.0" prefHeight="160.0" prefWidth="242.0">
               <columns>
-                <TableColumn fx:id="Agent_Name" prefWidth="205.60001220703126" text="Agent" />
+                <TableColumn fx:id="Agent_Name" prefWidth="205.60001220703126" text="Name" />
+                 <TableColumn fx:id="Agent_Email" prefWidth="205.60001220703126" text="Email" />
               </columns>
             </TableView>
             <Label layoutX="556.0" layoutY="25.0" text="Agents">
@@ -83,7 +84,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Button layoutX="708.0" layoutY="220.0" mnemonicParsing="false" onAction="#deleteAgent" style="-fx-background-color: #9147FF;" text="Delete" textFill="WHITE">
+            <Button layoutX="743.0" layoutY="219.0" mnemonicParsing="false" onAction="#deleteAgent" style="-fx-background-color: #9147FF;" text="Delete" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -91,7 +92,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="644.0" layoutY="220.0" mnemonicParsing="false" onAction="#modifyAgent" style="-fx-background-color: #EFEFF1;" text="Modify">
+            <Button layoutX="679.0" layoutY="219.0" mnemonicParsing="false" onAction="#modifyAgent" style="-fx-background-color: #EFEFF1;" text="Modify">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -99,7 +100,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="596.0" layoutY="220.0" mnemonicParsing="false" onAction="#addAgent" style="-fx-background-color: #EFEFF1;" text="Add">
+            <Button layoutX="631.0" layoutY="219.0" mnemonicParsing="false" onAction="#addAgent" style="-fx-background-color: #EFEFF1;" text="Add">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

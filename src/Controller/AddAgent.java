@@ -17,13 +17,13 @@ import java.io.IOException;
 
 public class AddAgent {
     private static String fxmlPath;
-    @FXML public TextField agentUsername;
+    @FXML private TextField agentUsername, agentEmail;
     @FXML private PasswordField agentPassword;
 
     @FXML
     private void addAgent(ActionEvent event) {
         if(validate() == false) {
-            AgentsDAO.addAgent(agentUsername.getText(), agentPassword.getText());
+            AgentsDAO.addAgent(agentUsername.getText(), agentPassword.getText(), agentEmail.getText());
             exitToMain(event);
         }
     }
@@ -31,7 +31,8 @@ public class AddAgent {
     private boolean validate() {
         if(
                 agentUsername.getText().isEmpty() ||
-                agentPassword.getText().isEmpty()
+                agentPassword.getText().isEmpty() ||
+                agentEmail.getText().isEmpty()
         ) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR!");

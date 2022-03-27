@@ -21,13 +21,13 @@ import java.util.ResourceBundle;
 
 public class ModifyAgent implements Initializable {
     private static String fxmlPath;
-    @FXML public TextField agentUsername;
+    @FXML private TextField agentUsername, agentEmail;
     @FXML private PasswordField agentPassword;
 
     @FXML
     private void updateAgent(ActionEvent event) {
         if(validate() == false) {
-            AgentsDAO.updateAgent(agentUsername.getText(), agentPassword.getText());
+            AgentsDAO.updateAgent(agentUsername.getText(), agentPassword.getText(), agentEmail.getText());
             exitToMain(event);
         }
     }
@@ -35,7 +35,8 @@ public class ModifyAgent implements Initializable {
     private boolean validate() {
         if(
                 agentUsername.getText().isEmpty() ||
-                        agentPassword.getText().isEmpty()
+                agentPassword.getText().isEmpty() ||
+                agentEmail.getText().isEmpty()
         ) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR!");
@@ -76,9 +77,9 @@ public class ModifyAgent implements Initializable {
         }
     }
     private void populateFields() {
-        agentUsername.setText(MainScreen.getAgentToModify().getAgent_Name());
+        agentUsername.setText(MainScreen.getAgentToModify().getName());
         agentPassword.setText(MainScreen.getAgentToModify().getPassword());
-
+        agentEmail.setText(MainScreen.getAgentToModify().getEmail());
     }
 
     @Override

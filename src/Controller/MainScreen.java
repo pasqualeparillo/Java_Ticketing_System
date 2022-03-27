@@ -58,7 +58,7 @@ public class MainScreen implements Initializable {
 
 
     @FXML private TableView<Agents> agentsTable;
-    @FXML private TableColumn<Agents, String> Agent_Name;
+    @FXML private TableColumn<Agents, String> Agent_Name, Agent_Email;
 
     private void setTicketsTable() {
         ticketsTable.setItems(TicketDAO.getAllTickets());
@@ -75,14 +75,14 @@ public class MainScreen implements Initializable {
     private void setCustomersTable() {
         customersTable.setItems(CustomersDAO.getAllCustomers());
         Customer_ID.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
-        Customer_Name.setCellValueFactory(new PropertyValueFactory<>("Customer_Name"));
+        Customer_Name.setCellValueFactory(new PropertyValueFactory<>("Name"));
         Customer_Phone_Number.setCellValueFactory(new PropertyValueFactory<>("Phone"));
         Customer_Email.setCellValueFactory(new PropertyValueFactory<>("Email"));
     }
     private void setAgentsTable() {
         agentsTable.setItems(AgentsDAO.getAllAgents());
         Agent_Name.setCellValueFactory(new PropertyValueFactory<>("Agent_Name"));
-
+        Agent_Email.setCellValueFactory(new PropertyValueFactory<>("Email"));
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -362,7 +362,7 @@ public class MainScreen implements Initializable {
                 }
             } else {
                 for(Customers c: allCustomerList) {
-                    String cname = c.getCustomer_Name().toLowerCase(Locale.ROOT);
+                    String cname = c.getName().toLowerCase(Locale.ROOT);
                     String searchParam = search.toLowerCase(Locale.ROOT);
                     if(cname.contains(searchParam) || c.getEmail().toLowerCase(Locale.ROOT).contains(searchParam)) {
                         foundCustomers.add(c);
@@ -405,9 +405,10 @@ public class MainScreen implements Initializable {
                 }
             } else {
                 for(Agents a: AgentsDAO.getAllAgents()) {
-                    String name = a.getAgent_Name().toLowerCase(Locale.ROOT);
+                    String name = a.getName().toLowerCase(Locale.ROOT);
+                    String email = a.getEmail().toLowerCase(Locale.ROOT);
                     String searchParam = search.toLowerCase(Locale.ROOT);
-                    if(name.contains(searchParam)) {
+                    if(name.contains(searchParam) || email.contains(searchParam)) {
                         foundAgents.add(a);
                     }
                 }
