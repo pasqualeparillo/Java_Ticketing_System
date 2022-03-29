@@ -39,10 +39,10 @@ public class UserReport implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         for(Customers c: CustomersDAO.getAllCustomers()) {
-            customerList.setValue(c.getCustomer_Name());
-            customerList.getItems().add(c.getCustomer_Name());
+            customerList.setValue(c.getName());
+            customerList.getItems().add(c.getName());
             try {
-                setTicketsTable(c.getCustomer_ID());
+                setTicketsTable(c.getId());
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -66,8 +66,8 @@ public class UserReport implements Initializable {
         int customer_ID = 0;
         String Customer_Name = customerList.getValue();
         for(int i=0; i < CustomersDAO.customersList.size(); i++) {
-            if(CustomersDAO.customersList.get(i).getCustomer_Name() == Customer_Name) {
-                customer_ID = CustomersDAO.customersList.get(i).getCustomer_ID();
+            if(CustomersDAO.customersList.get(i).getName() == Customer_Name) {
+                customer_ID = CustomersDAO.customersList.get(i).getId();
             }
         }
         setTicketsTable(customer_ID);

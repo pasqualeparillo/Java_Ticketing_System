@@ -74,15 +74,19 @@ public class MainScreen implements Initializable {
     }
     private void setCustomersTable() {
         customersTable.setItems(CustomersDAO.getAllCustomers());
-        Customer_ID.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
-        Customer_Name.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        for (Customers c: CustomersDAO.getAllCustomers() ){
+            System.out.println(c.getId());
+        }
+        Customer_ID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        Customer_Name.setCellValueFactory(new PropertyValueFactory<>("name"));
         Customer_Phone_Number.setCellValueFactory(new PropertyValueFactory<>("Phone"));
-        Customer_Email.setCellValueFactory(new PropertyValueFactory<>("Email"));
+        Customer_Email.setCellValueFactory(new PropertyValueFactory<>("email"));
     }
     private void setAgentsTable() {
         agentsTable.setItems(AgentsDAO.getAllAgents());
-        Agent_Name.setCellValueFactory(new PropertyValueFactory<>("Agent_Name"));
-        Agent_Email.setCellValueFactory(new PropertyValueFactory<>("Email"));
+
+        Agent_Name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        Agent_Email.setCellValueFactory(new PropertyValueFactory<>("email"));
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -160,7 +164,7 @@ public class MainScreen implements Initializable {
         Customers selectedItem = customersTable.getSelectionModel().getSelectedItem();
         Alert alertConfirm = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
         customerToModify = selectedItem;
-        ObservableList<Tickets> customerTickets = TicketDAO.getTicketsByUser(customerToModify.getCustomer_ID());
+        ObservableList<Tickets> customerTickets = TicketDAO.getTicketsByUser(customerToModify.getId());
         if(selectedItem != null && customerTickets == null) {
             alertConfirm.setTitle("Please Confirm");
             alertConfirm.setContentText("Are you sure you would like to delete this customer");
@@ -274,7 +278,8 @@ public class MainScreen implements Initializable {
     public void deleteAgent(ActionEvent actionEvent) throws SQLException {
         Agents selectedItem = agentsTable.getSelectionModel().getSelectedItem();
         Alert alertConfirm = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
-        ObservableList<Tickets> agentTickets = TicketDAO.getTicketsByAgent(customerToModify.getCustomer_ID());
+        ObservableList<Tickets> agentTickets = TicketDAO.getTicketsByAgent(customerToModify.getId());
+        System.out.println(customerToModify.getId());
         agentToModify = selectedItem;
         if(selectedItem != null && agentTickets == null) {
             alertConfirm.setTitle("Are you sure you would like to delete this agent");
@@ -356,7 +361,7 @@ public class MainScreen implements Initializable {
             if(isInt(search)) {
                 int searchedInt = Integer.parseInt(search);
                 for(Customers c: allCustomerList) {
-                    if(c.getCustomer_ID() == searchedInt) {
+                    if(c.getId() == searchedInt) {
                         foundCustomers.add(c);
                     }
                 }
@@ -399,7 +404,7 @@ public class MainScreen implements Initializable {
             if(isInt(search)) {
                 int searchedInt = Integer.parseInt(search);
                 for(Agents a: AgentsDAO.getAllAgents()) {
-                    if(a.getAgent_ID() == searchedInt) {
+                    if(a.getId() == searchedInt) {
                         foundAgents.add(a);
                     }
                 }

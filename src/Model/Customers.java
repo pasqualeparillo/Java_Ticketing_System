@@ -4,9 +4,6 @@ package Model;
  * Customers class
  */
 public class Customers extends Employee {
-    private int Customer_ID;
-    private String Customer_Name;
-    private String Email;
     private String Department;
     private String Phone;
 
@@ -16,30 +13,6 @@ public class Customers extends Employee {
         setEmail(email);
         Department = department;
         Phone = phone;
-    }
-
-    public int getCustomer_ID() {
-        return Customer_ID;
-    }
-
-    public void setCustomer_ID(int customer_ID) {
-        Customer_ID = customer_ID;
-    }
-
-    public String getCustomer_Name() {
-        return Customer_Name;
-    }
-
-    public void setCustomer_Name(String customer_Name) {
-        Customer_Name = customer_Name;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
     }
 
     public String getDepartment() {

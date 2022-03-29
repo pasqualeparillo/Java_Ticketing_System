@@ -14,7 +14,6 @@ public class JDBC {
     private static final String userName = "mUIpp1Z0bb"; // Username
     private static String password = "6PIn0KNj4j"; // Password
     public static Connection connection;  // Connection Interface
-    private static PreparedStatement preparedStatement;
 
     public static void openConnection() {
         try {
@@ -36,17 +35,5 @@ public class JDBC {
     }
     public static Connection getConnection() {
         return connection;
-    }
-    public static void makePreparedStatement(String sqlStatement, Connection conn) throws SQLException {
-        if (conn != null)
-            preparedStatement = conn.prepareStatement(sqlStatement);
-        else
-            System.out.println("Prepared Statement Creation Failed!");
-    }
-    public static PreparedStatement getPreparedStatement() throws SQLException {
-        if (preparedStatement != null)
-            return preparedStatement;
-        else System.out.println("Null reference to Prepared Statement");
-        return null;
     }
 }

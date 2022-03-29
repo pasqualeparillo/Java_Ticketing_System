@@ -47,6 +47,7 @@ public class TicketDAO {
      * @return
      */
     public static ObservableList<Tickets> getTicketsByUser(int customer_ID) {
+        System.out.println(customer_ID);
         String sql = String.format("SELECT * FROM Tickets WHERE Customer_ID=%s.", customer_ID);
         try {
             ticketsList.clear();

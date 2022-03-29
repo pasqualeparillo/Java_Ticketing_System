@@ -26,10 +26,11 @@ public class AgentsDAO {
             PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
             ResultSet sqlQueryResult = sqlQuery.executeQuery();
             while(sqlQueryResult.next()) {
-                int Agent_ID = sqlQueryResult.getInt("Agent_ID");
-                String Agent_Name = sqlQueryResult.getString("Agent_Name");
+                System.out.println(sqlQueryResult);
+                int Agent_ID = sqlQueryResult.getInt("id");
+                String Agent_Name = sqlQueryResult.getString("name");
                 String Password = sqlQueryResult.getString("Password");
-                String Email = sqlQueryResult.getString("Email");
+                String Email = sqlQueryResult.getString("email");
                 Agents agents = new Agents(Agent_ID, Agent_Name, Password, Email);
                 agentList.add(agents);
             }
@@ -42,7 +43,7 @@ public class AgentsDAO {
      */
     public static void updateAgent(String Username,String Password, String Email) {
         try {
-            String sql = String.format("Update Agents set Agent_Name='%s', Password='%s', Email='%s' WHERE Agent_ID=%s", Username, Password, Email, MainScreen.getAgentToModify().getAgent_ID());
+            String sql = String.format("Update Agents set name='%s', Password='%s', Email='%s' WHERE Agent_ID=%s", Username, Password, Email, MainScreen.getAgentToModify().getId());
             JDBC.getConnection().prepareStatement(sql).execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,7 +54,7 @@ public class AgentsDAO {
      */
     public static void addAgent(String Username, String Password, String Email) {
         try {
-            String sql = String.format("INSERT INTO Agents (Agent_Name, Password, Email) VALUES ('%s', '%s', '%s')", Username, Password, Email);
+            String sql = String.format("INSERT INTO Agents (name, Password, email) VALUES ('%s', '%s', '%s')", Username, Password, Email);
             JDBC.getConnection().prepareStatement(sql).execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,7 +66,7 @@ public class AgentsDAO {
      * @throws SQLException
      */
     public static ObservableList<Agents> deleteAgent() throws SQLException {
-        String sql = String.format("DELETE FROM Agents WHERE Agent_ID=%s.", MainScreen.getAgentToModify().getAgent_ID());
+        String sql = String.format("DELETE FROM Agents WHERE Agent_ID=%s.", MainScreen.getAgentToModify().getId());
         try {
             PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
             sqlQuery.executeUpdate();

@@ -83,7 +83,7 @@ public class ModifyCustomer implements Initializable {
         customerDepartment.getItems().add("Marketing");
         customerDepartment.getItems().add("Human Resources");
         for(Customers c: CustomersDAO.getAllCustomers()) {
-            if(c.getCustomer_ID() == MainScreen.getCustomerToModify().getCustomer_ID()) {
+            if(c.getId() == MainScreen.getCustomerToModify().getId()) {
                 customerDepartment.setValue(c.getDepartment());
             }
         }
@@ -91,7 +91,7 @@ public class ModifyCustomer implements Initializable {
         System.out.println(MainScreen.getCustomerToModify().getPhone());
         customerPhone.setText(MainScreen.getCustomerToModify().getPhone());
         customerEmail.setText(MainScreen.getCustomerToModify().getEmail());
-        customerName.setText(MainScreen.getCustomerToModify().getCustomer_Name());
+        customerName.setText(MainScreen.getCustomerToModify().getName());
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

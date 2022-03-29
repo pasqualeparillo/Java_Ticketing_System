@@ -26,11 +26,12 @@ public class CustomersDAO {
             PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
             ResultSet sqlQueryResult = sqlQuery.executeQuery();
             while(sqlQueryResult.next()) {
-                int Customer_ID = sqlQueryResult.getInt("Customer_ID");
-                String Customer_Name = sqlQueryResult.getString("Customer_Name");
-                String Email = sqlQueryResult.getString("Email");
+                int Customer_ID = sqlQueryResult.getInt("id");
+                String Customer_Name = sqlQueryResult.getString("name");
+                String Email = sqlQueryResult.getString("email");
                 String Department = sqlQueryResult.getString("Department");
                 String Phone = sqlQueryResult.getString("Phone");
+                System.out.println(Customer_ID);
                 Customers customers = new Customers(Customer_ID, Customer_Name,Email, Department, Phone);
                 customersList.add(customers);
             }
@@ -43,7 +44,7 @@ public class CustomersDAO {
      */
     public static void updateCustomer(String Customer_Name, String Email, String Department, String Phone) {
         try {
-            String sql = String.format(" Update Tickets set Customer_Name='%s', Email='%s', Department='%s', Phone='%s' WHERE Customer_ID=%s", Customer_Name, Email, Department, Phone, MainScreen.getCustomerToModify().getCustomer_ID());
+            String sql = String.format(" Update Tickets set name='%s', Email='%s', Department='%s', Phone='%s' WHERE id=%s", Customer_Name, Email, Department, Phone, MainScreen.getCustomerToModify().getId());
             JDBC.getConnection().prepareStatement(sql).execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,7 +55,7 @@ public class CustomersDAO {
      */
     public static void addCustomer(String Customer_Name, String Email, String Department, String Phone) {
         try {
-            String sql = String.format("INSERT INTO Customers (Customer_Name, Email, Department, Phone) VALUES ('%s', '%s', '%s', '%s')", Customer_Name, Email, Department, Phone);
+            String sql = String.format("INSERT INTO Customers (name, Email, Department, Phone) VALUES ('%s', '%s', '%s', '%s')", Customer_Name, Email, Department, Phone);
             JDBC.getConnection().prepareStatement(sql).execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,7 +67,7 @@ public class CustomersDAO {
      * @throws SQLException
      */
     public static ObservableList<Customers> deleteCustomer() throws SQLException {
-        String sql = String.format("DELETE FROM Customers WHERE Customer_ID=%s.", MainScreen.getCustomerToModify().getCustomer_ID());
+        String sql = String.format("DELETE FROM Customers WHERE id=%s.", MainScreen.getCustomerToModify().getId());
         try {
             PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
             sqlQuery.executeUpdate();

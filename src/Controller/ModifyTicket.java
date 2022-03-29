@@ -57,18 +57,18 @@ public class ModifyTicket implements Initializable {
     private void populateFields() {
         // Add ticket customers
         for(Customers c: CustomersDAO.getAllCustomers()) {
-            String customer_name = c.getCustomer_Name();
+            String customer_name = c.getName();
             ticketCustomer.getItems().add(customer_name);
-            if(c.getCustomer_ID() == MainScreen.getTicketToModify().getCustomer_ID()) {
-                ticketCustomer.setValue(c.getCustomer_Name());
+            if(c.getId() == MainScreen.getTicketToModify().getCustomer_ID()) {
+                ticketCustomer.setValue(c.getName());
             }
         }
         // Add ticket agents
         for(Agents a: AgentsDAO.getAllAgents()) {
-            String agent_name = a.getAgent_Name();
+            String agent_name = a.getName();
             ticketAgent.getItems().add(agent_name);
-            if(a.getAgent_ID() == MainScreen.getTicketToModify().getAgent_ID()) {
-                ticketAgent.setValue(a.getAgent_Name());
+            if(a.getId() == MainScreen.getTicketToModify().getAgent_ID()) {
+                ticketAgent.setValue(a.getName());
             }
         }
         // Add ticket priority
@@ -99,13 +99,13 @@ public class ModifyTicket implements Initializable {
             int customerID = 0;
             int agentID = 0;
             for(Customers c: CustomersDAO.getAllCustomers()) {
-                if(Objects.equals(c.getCustomer_Name(), ticketCustomer.getValue())) {
-                    customerID = c.getCustomer_ID();
+                if(Objects.equals(c.getName(), ticketCustomer.getValue())) {
+                    customerID = c.getId();
                 }
             }
             for(Agents a: AgentsDAO.getAllAgents()) {
-                if(Objects.equals(a.getAgent_Name(), ticketAgent.getValue())) {
-                    agentID = a.getAgent_ID();
+                if(Objects.equals(a.getName(), ticketAgent.getValue())) {
+                    agentID = a.getId();
                 }
             }
             TicketDAO.updateTicket(ticketTitle.getText(),ticketDescription.getText(), ticketNote.getText(), ticketType.getValue(), ticketStatus.getValue(), ticketPriority.getValue(), customerID, agentID, MainScreen.getTicketToModify().getTicket_ID());

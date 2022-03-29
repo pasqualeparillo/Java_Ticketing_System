@@ -38,13 +38,13 @@ public class AddTicket implements Initializable {
             int customerID = 0;
             int agentID = 0;
             for(Customers c: CustomersDAO.getAllCustomers()) {
-                if(Objects.equals(c.getCustomer_Name(), ticketCustomer.getValue())) {
-                    customerID = c.getCustomer_ID();
+                if(Objects.equals(c.getName(), ticketCustomer.getValue())) {
+                    customerID = c.getId();
                 }
             }
             for(Agents a: AgentsDAO.getAllAgents()) {
-                if(Objects.equals(a.getAgent_Name(), ticketAgent.getValue())) {
-                    agentID = a.getAgent_ID();
+                if(Objects.equals(a.getName(), ticketAgent.getValue())) {
+                    agentID = a.getId();
                 }
             }
             TicketDAO.addTicket(ticketTitle.getText(),ticketDescription.getText(), ticketNote.getText(), ticketType.getValue(), ticketStatus.getValue(), ticketPriority.getValue(), customerID, agentID);
@@ -101,12 +101,12 @@ public class AddTicket implements Initializable {
     private void populateFields() {
         // Add ticket customers
         for(Customers c: CustomersDAO.getAllCustomers()) {
-            String customer_name = c.getCustomer_Name();
+            String customer_name = c.getName();
             ticketCustomer.getItems().add(customer_name);
         }
         // Add ticket agents
         for(Agents a: AgentsDAO.getAllAgents()) {
-            String agent_name = a.getAgent_Name();
+            String agent_name = a.getName();
             ticketAgent.getItems().add(agent_name);
             System.out.println(agent_name);
         }

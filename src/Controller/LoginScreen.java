@@ -30,7 +30,7 @@ public class LoginScreen {
     public void submitLogin(ActionEvent actionEvent) {
         if(!userNameField.getText().isEmpty() || !passwordField.getText().isEmpty()) {
             try {
-                String sql = String.format("SELECT Agent_Name, Password FROM Agents WHERE Agent_Name = '%s' AND Password = '%s'", userNameField.getText(), passwordField.getText());
+                String sql = String.format("SELECT name, Password FROM Agents WHERE name = '%s' AND Password = '%s'", userNameField.getText(), passwordField.getText());
                 PreparedStatement preparedStatement = JDBC.getConnection().prepareStatement(sql);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 if(resultSet.next()) {
