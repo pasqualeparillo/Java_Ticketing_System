@@ -1,4 +1,4 @@
-USE mUIpp1Z0bb;
+USE defaultdb;
 
 DROP TABLE IF EXISTS `Agents`;
 
@@ -55,4 +55,4 @@ CREATE TABLE `Tickets` (
 				 CONSTRAINT `agents_ibfk_1` FOREIGN KEY (`Agent_ID`) REFERENCES `Agents` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
-insert into Agents(name, Password) VALUES ('admin', 'admin')
+insert into Agents(name, Password, email) VALUES ('admin', 'admin', 'patparillo@gmail.com')

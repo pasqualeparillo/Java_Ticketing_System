@@ -18,7 +18,9 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+/**
+ * controller for handling login
+ */
 public class LoginScreen {
     private String fxmlPath;
 
@@ -28,7 +30,6 @@ public class LoginScreen {
 
 
     public void submitLogin(ActionEvent actionEvent) {
-        if(!userNameField.getText().isEmpty() || !passwordField.getText().isEmpty()) {
             try {
                 String sql = String.format("SELECT name, Password FROM Agents WHERE name = '%s' AND Password = '%s'", userNameField.getText(), passwordField.getText());
                 PreparedStatement preparedStatement = JDBC.getConnection().prepareStatement(sql);
@@ -52,7 +53,6 @@ public class LoginScreen {
                 alert.setContentText("Username or Password Incorrect");
                 alert.showAndWait();
             }
-        }
     }
 
     /**

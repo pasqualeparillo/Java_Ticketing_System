@@ -21,7 +21,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
+/**
+ * controller for handling the ticket urgency report
+ */
 public class UrgencyReport implements Initializable {
     private String fxmlPath;
     @FXML private TableView<Tickets> ticketsTable;
@@ -47,10 +49,20 @@ public class UrgencyReport implements Initializable {
             e.printStackTrace();
         }
     }
+    /**
+     * Sets the ticket urgency to search for
+     * @throws SQLException
+     */
     @FXML
     private void changeUrgency() throws SQLException {
         setTicketsTable(urgencyList.getValue());
     }
+
+    /**
+     * populates the report table
+     * @param urgency
+     * @throws SQLException
+     */
     private void setTicketsTable(String urgency) throws SQLException {
         ticketsTable.setItems(TicketDAO.getTicketsByUrgency(urgency));
         Ticket_ID.setCellValueFactory(new PropertyValueFactory<>("Ticket_ID"));

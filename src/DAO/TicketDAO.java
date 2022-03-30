@@ -10,7 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-
+/**
+ * used to handle sql queries for tickets
+ */
 public class TicketDAO {
     public static ObservableList<Tickets> ticketsList = FXCollections.observableArrayList();
 
@@ -19,6 +21,9 @@ public class TicketDAO {
         return ticketsList;
     }
 
+    /**
+     * gets all tickets
+     */
     public static void getTickets() {
         try {
            ticketsList.clear();
@@ -47,7 +52,6 @@ public class TicketDAO {
      * @return
      */
     public static ObservableList<Tickets> getTicketsByUser(int customer_ID) {
-        System.out.println(customer_ID);
         String sql = String.format("SELECT * FROM Tickets WHERE Customer_ID=%s.", customer_ID);
         try {
             ticketsList.clear();

@@ -1,5 +1,8 @@
 package Model;
 
+/**
+ * employee parent class
+ */
 public abstract class Employee {
     protected int id;
     protected String name;

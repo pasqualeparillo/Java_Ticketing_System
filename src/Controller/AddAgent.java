@@ -15,11 +15,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * controller for adding agents
+ */
 public class AddAgent {
     private static String fxmlPath;
     @FXML private TextField agentUsername, agentEmail;
     @FXML private PasswordField agentPassword;
 
+    /**
+     * Adds an agent
+     * @param event
+     */
     @FXML
     private void addAgent(ActionEvent event) {
         if(validate() == false) {
@@ -27,7 +34,9 @@ public class AddAgent {
             exitToMain(event);
         }
     }
-
+    /**
+     * Validated user input fields
+     */
     private boolean validate() {
         if(
                 agentUsername.getText().isEmpty() ||

@@ -10,7 +10,9 @@ import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+/**
+ * used to handle sql queries for agents
+ */
 public class AgentsDAO {
     public static ObservableList<Agents> agentList = FXCollections.observableArrayList();
 
@@ -19,6 +21,9 @@ public class AgentsDAO {
         return agentList;
     }
 
+    /**
+     * gets all agents and adds them to list
+     */
     public static void getAgents() {
         try {
             agentList.clear();
@@ -26,7 +31,6 @@ public class AgentsDAO {
             PreparedStatement sqlQuery = JDBC.getConnection().prepareStatement(sql);
             ResultSet sqlQueryResult = sqlQuery.executeQuery();
             while(sqlQueryResult.next()) {
-                System.out.println(sqlQueryResult);
                 int Agent_ID = sqlQueryResult.getInt("id");
                 String Agent_Name = sqlQueryResult.getString("name");
                 String Password = sqlQueryResult.getString("Password");

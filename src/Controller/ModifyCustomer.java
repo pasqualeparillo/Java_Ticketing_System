@@ -17,13 +17,18 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+/**
+ * controller for handling modifying customers
+ */
 public class ModifyCustomer implements Initializable {
     @FXML public TextField customerName, customerEmail, customerPhone;
     @FXML public ComboBox<String> customerDepartment;
 
     private static String fxmlPath;
 
+    /**
+     * Saves a customer
+     */
     @FXML
     private void saveCustomer(ActionEvent event) {
         if(validate() == false) {
@@ -31,7 +36,9 @@ public class ModifyCustomer implements Initializable {
             exitToMain(event);
         }
     }
-
+    /**
+     * Validated user input fields
+     */
     private boolean validate() {
         if(
                 customerName.getText().isEmpty() ||
@@ -77,6 +84,10 @@ public class ModifyCustomer implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * populated selected customer
+     */
     private void populateFields() {
         customerDepartment.getItems().add("IT");
         customerDepartment.getItems().add("Finance");

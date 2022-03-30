@@ -22,7 +22,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
+/**
+ * controller for handling modifying tickets
+ */
 public class ModifyTicket implements Initializable {
     @FXML public TextField ticketDescription, ticketNote, ticketTitle;
     @FXML public ComboBox<String> ticketType, ticketStatus, ticketPriority, ticketCustomer, ticketAgent;
@@ -54,6 +56,10 @@ public class ModifyTicket implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * populates selected ticket
+     */
     private void populateFields() {
         // Add ticket customers
         for(Customers c: CustomersDAO.getAllCustomers()) {
@@ -93,6 +99,11 @@ public class ModifyTicket implements Initializable {
         // Set ticket title
         ticketTitle.setText(MainScreen.getTicketToModify().getTitle());
     }
+
+    /**
+     * Saves a ticket
+     * @param event
+     */
     @FXML
     private void saveTicket(ActionEvent event) {
         if(validate() == false) {
@@ -112,7 +123,9 @@ public class ModifyTicket implements Initializable {
             exitToMain(event);
         }
     }
-
+    /**
+     * Validated user input fields
+     */
     private boolean validate() {
         if(
                 ticketType.getValue() == null ||

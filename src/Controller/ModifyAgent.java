@@ -18,12 +18,18 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+/**
+ * controller for handling adding agents
+ */
 public class ModifyAgent implements Initializable {
     private static String fxmlPath;
     @FXML private TextField agentUsername, agentEmail;
     @FXML private PasswordField agentPassword;
 
+    /**
+     * updates an agent
+     * @param event
+     */
     @FXML
     private void updateAgent(ActionEvent event) {
         if(validate() == false) {
@@ -31,7 +37,9 @@ public class ModifyAgent implements Initializable {
             exitToMain(event);
         }
     }
-
+    /**
+     * Validated user input fields
+     */
     private boolean validate() {
         if(
                 agentUsername.getText().isEmpty() ||
@@ -76,6 +84,10 @@ public class ModifyAgent implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * populates selected agent
+     */
     private void populateFields() {
         agentUsername.setText(MainScreen.getAgentToModify().getName());
         agentPassword.setText(MainScreen.getAgentToModify().getPassword());

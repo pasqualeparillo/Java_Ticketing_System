@@ -25,13 +25,19 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
 import java.util.ResourceBundle;
-
+/**
+ * controller for adding tickets
+ */
 public class AddTicket implements Initializable {
     @FXML public TextField ticketDescription, ticketTitle, ticketNote;
     @FXML public ComboBox<String> ticketType, ticketStatus, ticketPriority, ticketCustomer, ticketAgent;
 
     private static String fxmlPath;
 
+    /**
+     * Saves a ticket
+     * @param event
+     */
     @FXML
     private void saveTicket(ActionEvent event) {
         if(validate() == false) {
@@ -52,6 +58,9 @@ public class AddTicket implements Initializable {
 
         }
     }
+    /**
+     * Validated user input fields
+     */
     private boolean validate() {
         if(
                 ticketType.getValue() == null ||
@@ -98,6 +107,10 @@ public class AddTicket implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * populates ticket fields
+     */
     private void populateFields() {
         // Add ticket customers
         for(Customers c: CustomersDAO.getAllCustomers()) {

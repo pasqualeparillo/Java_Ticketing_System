@@ -18,13 +18,19 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+/**
+ * controller for adding customer
+ */
 public class AddCustomer implements Initializable {
     @FXML public TextField customerID, customerName, customerEmail, customerPhone;
     @FXML public ComboBox<String> customerDepartment;
 
     private static String fxmlPath;
 
+    /**
+     * Adds a customer
+     * @param event
+     */
     @FXML
     private void saveCustomer(ActionEvent event) {
         if(validate() == false) {
@@ -32,7 +38,9 @@ public class AddCustomer implements Initializable {
             exitToMain(event);
         }
     }
-
+    /**
+     * Validated user input fields
+     */
     private boolean validate() {
         if(
                 customerName.getText().isEmpty() ||

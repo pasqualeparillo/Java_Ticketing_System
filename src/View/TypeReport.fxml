@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.text.Font?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Controller.TypeReport"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TypeReport">
     <children>
         <AnchorPane layoutX="20.0" layoutY="40.0" prefHeight="200.0" prefWidth="560.0">
             <children>
@@ -32,10 +26,10 @@
         <AnchorPane layoutX="200.0" layoutY="257.0" prefHeight="129.0" prefWidth="200.0">
             <children>
                 <ComboBox fx:id="typeList" layoutX="25.0" layoutY="52.0" onAction="#changeType" prefWidth="150.0" />
-                <Label layoutX="53.0" layoutY="25.0" text="Select a customer" />
+                <Label layoutX="53.0" layoutY="25.0" text="Select a type" />
             </children>
         </AnchorPane>
-        <Label layoutX="241.0" layoutY="5.0" text="Tickets By Customer">
+        <Label layoutX="241.0" layoutY="5.0" text="Tickets By Type">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>

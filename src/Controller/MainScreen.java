@@ -27,7 +27,9 @@ import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
+/**
+ * controller for handling initial main page
+ */
 public class MainScreen implements Initializable {
     private static String fxmlPath;
 
@@ -60,6 +62,9 @@ public class MainScreen implements Initializable {
     @FXML private TableView<Agents> agentsTable;
     @FXML private TableColumn<Agents, String> Agent_Name, Agent_Email;
 
+    /**
+     * Sets tickets table
+     */
     private void setTicketsTable() {
         ticketsTable.setItems(TicketDAO.getAllTickets());
         Ticket_ID.setCellValueFactory(new PropertyValueFactory<>("Ticket_ID"));
@@ -72,19 +77,21 @@ public class MainScreen implements Initializable {
         Ticket_Customer_ID.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
         Ticket_Agent_ID.setCellValueFactory(new PropertyValueFactory<>("Agent_ID"));
     }
+    /**
+     * Sets customers table
+     */
     private void setCustomersTable() {
         customersTable.setItems(CustomersDAO.getAllCustomers());
-        for (Customers c: CustomersDAO.getAllCustomers() ){
-            System.out.println(c.getId());
-        }
         Customer_ID.setCellValueFactory(new PropertyValueFactory<>("id"));
         Customer_Name.setCellValueFactory(new PropertyValueFactory<>("name"));
         Customer_Phone_Number.setCellValueFactory(new PropertyValueFactory<>("Phone"));
         Customer_Email.setCellValueFactory(new PropertyValueFactory<>("email"));
     }
+    /**
+     * Sets agents table
+     */
     private void setAgentsTable() {
         agentsTable.setItems(AgentsDAO.getAllAgents());
-
         Agent_Name.setCellValueFactory(new PropertyValueFactory<>("name"));
         Agent_Email.setCellValueFactory(new PropertyValueFactory<>("email"));
     }
@@ -277,10 +284,9 @@ public class MainScreen implements Initializable {
     @FXML
     public void deleteAgent(ActionEvent actionEvent) throws SQLException {
         Agents selectedItem = agentsTable.getSelectionModel().getSelectedItem();
-        Alert alertConfirm = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
-        ObservableList<Tickets> agentTickets = TicketDAO.getTicketsByAgent(customerToModify.getId());
-        System.out.println(customerToModify.getId());
         agentToModify = selectedItem;
+        Alert alertConfirm = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.OK);
+        ObservableList<Tickets> agentTickets = TicketDAO.getTicketsByAgent(agentToModify.getId());
         if(selectedItem != null && agentTickets == null) {
             alertConfirm.setTitle("Are you sure you would like to delete this agent");
             alertConfirm.setContentText("Please confirm");
@@ -289,8 +295,8 @@ public class MainScreen implements Initializable {
                 AgentsDAO.deleteAgent();
             }
         } else {
-            alertConfirm.setTitle("Either you did not select an agent or the agent has a ticket assigned to them");
-            alertConfirm.setContentText("Please confirm");
+            alertConfirm.setTitle("Please confirm");
+            alertConfirm.setContentText("Either you did not select an agent or the agent has a ticket assigned to them");
             alertConfirm.showAndWait();
         }
     }
@@ -325,7 +331,7 @@ public class MainScreen implements Initializable {
                 for(Tickets t: TicketDAO.getAllTickets()) {
                     String status = t.getStatus().toLowerCase(Locale.ROOT);
                     String searchParam = search.toLowerCase(Locale.ROOT);
-                    if(status.contains(searchParam) || t.getNote().toLowerCase(Locale.ROOT).contains(search)) {
+                    if(status.contains(searchParam) || t.getNote().toLowerCase(Locale.ROOT).contains(search) || t.getDescription().toLowerCase(Locale.ROOT).contains(search) || t.getType().toLowerCase(Locale.ROOT).contains(search) ||  t.getTitle().toLowerCase(Locale.ROOT).contains(search)) {
                         foundTickets.add(t);
                     }
                 }

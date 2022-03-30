@@ -21,7 +21,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
+/**
+ * controller for handling the ticket type report
+ */
 public class TypeReport implements Initializable {
     private String fxmlPath;
     @FXML private TableView<Tickets> ticketsTable;
@@ -49,10 +51,21 @@ public class TypeReport implements Initializable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * sets the type of ticket to search for
+     * @throws SQLException
+     */
     @FXML
     private void changeType() throws SQLException {
         setTicketsTable(typeList.getValue());
     }
+
+    /**
+     * sets report table results
+     * @param ticketType
+     * @throws SQLException
+     */
     private void setTicketsTable(String ticketType) throws SQLException {
         ticketsTable.setItems(TicketDAO.getTicketsByType(ticketType));
         Ticket_ID.setCellValueFactory(new PropertyValueFactory<>("Ticket_ID"));

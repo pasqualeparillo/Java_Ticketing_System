@@ -10,7 +10,9 @@ import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+/**
+ * used to handle sql queries for customers
+ */
 public class CustomersDAO {
     public static ObservableList<Customers> customersList = FXCollections.observableArrayList();
 
@@ -19,6 +21,9 @@ public class CustomersDAO {
         return customersList;
     }
 
+    /**
+     * gets all customers
+     */
     public static void getCustomers() {
         try {
             customersList.clear();
@@ -31,7 +36,6 @@ public class CustomersDAO {
                 String Email = sqlQueryResult.getString("email");
                 String Department = sqlQueryResult.getString("Department");
                 String Phone = sqlQueryResult.getString("Phone");
-                System.out.println(Customer_ID);
                 Customers customers = new Customers(Customer_ID, Customer_Name,Email, Department, Phone);
                 customersList.add(customers);
             }

@@ -21,7 +21,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-
+/**
+ * controller for handling the ticket user report
+ */
 public class UserReport implements Initializable {
     private String fxmlPath;
     @FXML private TableView<Tickets> ticketsTable;
@@ -48,6 +50,12 @@ public class UserReport implements Initializable {
             }
         }
     }
+
+    /**
+     * populates the report table with results
+     * @param customer_ID
+     * @throws SQLException
+     */
     private void setTicketsTable(int customer_ID) throws SQLException {
         ticketsTable.setItems(TicketDAO.getTicketsByUser(customer_ID));
         Ticket_ID.setCellValueFactory(new PropertyValueFactory<>("Ticket_ID"));
@@ -60,7 +68,10 @@ public class UserReport implements Initializable {
         Ticket_Customer_ID.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
         Ticket_Agent_ID.setCellValueFactory(new PropertyValueFactory<>("Agent_ID"));
     }
-
+    /**
+     * Sets the ticket customer to search for
+     * @throws SQLException
+     */
     @FXML
     private void changeUser() throws SQLException {
         int customer_ID = 0;
